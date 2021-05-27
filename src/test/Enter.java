@@ -67,21 +67,16 @@ class Webcam{
 //信号灯
 class Semaphore{
     public double Tgreen;//T0时绿灯剩余时间
-    public double Tyellow;//交叉口黄灯时间
     public double Xi;//交叉口信号灯绿信比
 
     public Semaphore() {}
-    public Semaphore(double Tgreen,double Tyellow,double Xi){
+    public Semaphore(double Tgreen,double Xi){
         this.Tgreen= Tgreen;
-        this.Tyellow=Tyellow;
         this.Xi=Xi;
     }
 
     public double getTgreen() {
         return Tgreen;
-    }
-    public double getTyellow() {
-        return Tyellow;
     }
     public double getXi() {
         return Xi;

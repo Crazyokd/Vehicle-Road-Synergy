@@ -3,14 +3,19 @@ package test;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Test {
-    public static ArrayList<TestData> atd = new ArrayList<>();
+
     public static void main(String[] args) {
         readTestData();
         //启动程序
         VehicleRoadSynergy vehicleRoadSynergy=new VehicleRoadSynergy();
-        vehicleRoadSynergy.start();
+
+        System.out.println("已成功读入"+VehicleRoadSynergy.atd.size()+"组数据，请输入想要运行的索引：");
+        Scanner scanner=new Scanner(System.in);
+        int index=scanner.nextInt();
+        vehicleRoadSynergy.start(index);
 
     }
     public static void readTestData(){
@@ -27,7 +32,7 @@ public class Test {
                     a[index]=Double.parseDouble(str);
                     str=new String();
                     if(index==9){
-                        atd.add(new TestData(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]));
+                        VehicleRoadSynergy.atd.add(new TestData(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]));
                         i++;
                     }
                     index=(index+1)%10;
@@ -35,7 +40,7 @@ public class Test {
                     str+=(char)v;
                 }
             }
-            for(TestData td:atd){
+            for(TestData td:VehicleRoadSynergy.atd){
                 System.out.println(td);
             }
         } catch (FileNotFoundException fileNotFoundException) {

@@ -1,15 +1,19 @@
 package test;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class VehicleRoadSynergy {
-    public static final double len=3;//标准小汽车长度
-    public static final double Vlim=20;//交叉口最高限速
-    public static final double Tr=0.6;//驾驶员平均反应时间
-    public static final double d=5;//引导灯间的距离
+    public static final double len=3;//标准小汽车长度(m)
+    public static final double Vlim=60;//交叉口最高限速(km/h)
+    public static final double Tr=1.2;//驾驶员平均反应时间(s)
+    public static final double d=5;//引导灯间的距离(m)
     public static final int f=1000;//打印频率
-    public static final double h=2.4;//饱和车头时距
+    public static final double h=2.4;//饱和车头时距(PCU/h)
     public static final int m=3;//交叉口进口道车道数
+    public static final double Tyellow=3.0;//交叉口黄灯时间(s)
+
+    public static ArrayList<TestData> atd = new ArrayList<>();//测试数据数组
 
     private long beginTime=initTime();//程序开始执行的时间
 
@@ -19,7 +23,7 @@ public class VehicleRoadSynergy {
         return new Date().getTime();
     }
 
-    public void start(){
+    public void start(int index){
         new Thread(){
             @Override
             public void run(){
@@ -39,8 +43,9 @@ public class VehicleRoadSynergy {
                 }
             }
         }.start();
-
-        run(new Enter(new OBU(),new Webcam(),new Semaphore(),new Detector()));
+        run(new Enter(new OBU((int)atd.get(index).V,(int)atd.get(index).D,(int)atd.get(index).As),
+                new Webcam((int)atd.get(index).N),new Semaphore(atd.get(index).Tgreen,atd.get(index).Xi),
+                new Detector((int)atd.get(index).Q)));
     }
 
     public void run(Enter enter){
@@ -56,7 +61,7 @@ public class VehicleRoadSynergy {
         }
         else{
             double Dy=enter.obu.D-enter.obu.V/3.6*enter.semaphore.Tgreen;
-            double Lp=enter.obu.V/3.6*enter.semaphore.Tyellow;
+            double Lp=enter.obu.V/3.6*VehicleRoadSynergy.Tyellow;
             if(Dy-Lp>0){
                 result=figureDistance(D1,enter.obu);
             }
