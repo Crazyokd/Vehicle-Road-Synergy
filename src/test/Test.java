@@ -1,8 +1,6 @@
 package test;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Test {
@@ -10,11 +8,10 @@ public class Test {
     public static void main(String[] args) {
         readTestData();
         //启动程序
-        VehicleRoadSynergy vehicleRoadSynergy=new VehicleRoadSynergy();
-
         System.out.println("已成功读入"+VehicleRoadSynergy.atd.size()+"组数据，请输入想要运行的索引：");
         Scanner scanner=new Scanner(System.in);
         int index=scanner.nextInt();
+        VehicleRoadSynergy vehicleRoadSynergy=new VehicleRoadSynergy();
         vehicleRoadSynergy.start(index);
 
     }
