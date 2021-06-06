@@ -8,13 +8,11 @@ public class TestData {
     double V;
     double h;
     double m;
-    double As;
     double Tgreen;
-    double Tyellow;
     public TestData(){}
 
     public TestData(double n, double xi, double q, double d,
-                    double v, double h, double m, double as, double tgreen, double tyellow) {
+                    double v, double h, double m, double tgreen) {
         N = n;
         Xi = xi;
         Q = q;
@@ -22,9 +20,7 @@ public class TestData {
         V = v;
         this.h = h;
         this.m = m;
-        As = as;
         Tgreen = tgreen;
-        Tyellow = tyellow;
     }
 
     @Override
@@ -37,9 +33,7 @@ public class TestData {
                 ", V=" + V +
                 ", h=" + h +
                 ", m=" + m +
-                ", As=" + As +
                 ", Tgreen=" + Tgreen +
-                ", Tyellow=" + Tyellow +
                 '}';
     }
 }

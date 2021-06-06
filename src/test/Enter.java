@@ -34,12 +34,11 @@ public class Enter {
 class OBU{
     public double V;//T0时车速
     public double D;//T0时车辆距停止线距离
-    public double As;//T0时车辆自身减速度
+
     public OBU(){};
-    public OBU(int V,int D,int As) {
+    public OBU(int V,int D) {
         this.V = V;
         this.D = D;
-        this.As = As;
     }
 
     public double getV() {
@@ -47,9 +46,6 @@ class OBU{
     }
     public double getD() {
         return D;
-    }
-    public double getAs() {
-        return As;
     }
 }
 //摄像头

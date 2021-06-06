@@ -8,10 +8,11 @@ public class VehicleRoadSynergy {
     public static final double Vlim=60;//交叉口最高限速(km/h)
     public static final double Tr=1.2;//驾驶员平均反应时间(s)
     public static final double d=5;//引导灯间的距离(m)
-    public static final int f=10;//打印频率
+    public static final int f=1000;//打印频率
     public static final double h=2.4;//饱和车头时距(PCU/h)
     public static final int m=3;//交叉口进口道车道数
     public static final double Tyellow=3.0;//交叉口黄灯时间(s)
+    public static final double As=1.5;//T0时车辆减速度
 
     public static ArrayList<TestData> atd = new ArrayList<>();//测试数据数组
 
@@ -43,7 +44,7 @@ public class VehicleRoadSynergy {
                 }
             }
         }.start();
-        run(new Enter(new OBU((int)atd.get(index).V,(int)atd.get(index).D,(int)atd.get(index).As),
+        run(new Enter(new OBU((int)atd.get(index).V,(int)atd.get(index).D),
                 new Webcam((int)atd.get(index).N),new Semaphore(atd.get(index).Tgreen,atd.get(index).Xi),
                 new Detector((int)atd.get(index).Q)));
     }
@@ -93,7 +94,7 @@ public class VehicleRoadSynergy {
         }
     }
     public Result figureDistance(double D1,OBU obu){
-        double Ls=Vlim*Tr+Vlim*Vlim/(2*obu.As);//Vlim具有不确定性
+        double Ls=Vlim*Tr+Vlim*Vlim/(2*As);//Vlim具有不确定性
         int i=getLightI(Ls,D1);
         double T2=(obu.D-D1)*3.6/obu.V;
 

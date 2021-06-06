@@ -21,18 +21,19 @@ public class Test {
             br = new BufferedReader(new FileReader(new File("testdata.txt")));
             String str = new String();
             int i=0;
-            double[] a=new double[10];
+            double[] a=new double[8];
             int index=0;
             while(i<17){
                 int v=br.read();
                 if(v==32||v==10){
                     a[index]=Double.parseDouble(str);
                     str=new String();
-                    if(index==9){
-                        VehicleRoadSynergy.atd.add(new TestData(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]));
+                    if(index==7){
+                        VehicleRoadSynergy.atd.add(new TestData(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]));
                         i++;
                     }
-                    index=(index+1)%10;
+                    System.out.println(i);
+                    index=(index+1)%8;
                 }else if(v!=13){
                     str+=(char)v;
                 }
